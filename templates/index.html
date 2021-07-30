@@ -1,0 +1,51 @@
+<html><body><p>index html dd</p>
+  <!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form method=post enctype=multipart/form-data>
+      <input type="file" name="file" id= "file">
+      <input type='button' value=Upload>
+    </form>
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+<script>
+  $('document').ready(
+    function(){
+      console.log('doc ready')
+      getAllUsers();
+    }
+  );
+  function getAllUsers(){
+    console.log('get users called')
+    $.ajax({
+      type: "POST",
+      url: 'http://127.0.0.1:5000/api/getUsers',
+      //data: data,
+      success: function(data){
+        console.log(data)
+      },error:function(error){console.log(error)},
+      'Content-type': 'application/json; charset=utf-8'
+    });
+  }
+  $(':file').on('change', function () {
+    var file = this.files[0];
+    if (file.size > 20*1024*1024) {
+      alert('max upload size is 20mb');
+    } // Also see .name, .type
+  });
+  function uploadFile(){
+    console.log('uploadFile called')
+    $.ajax({
+      type: "POST",
+      url: 'http://127.0.0.1:5000/upload-file',
+      data:new FormData($('#file')),
+      success: function(data){
+        console.log(data)
+      },error:function(error){console.log(error)},
+      'Content-type': 'application/json; charset=utf-8'
+    });
+  }
+</script>
+</body></html>
