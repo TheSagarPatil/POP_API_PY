@@ -148,6 +148,21 @@ def updateUserProfile():
 		return formResponse(query_data_frame)
 	else:
 		return formResponse({'message':'bad request (input format)'}, 401)
+		
+#UpdateUser
+@app.route('/api/updateUserImage', methods=['POST'])
+@app.route('/api/UserProfile/updateuserImage', methods=['POST'])
+@cross_origin()
+def updateuserImage():
+	if(request.method =='POST'):
+		#json = request.json
+		#cursor, conn = getConnection()
+		#query_data_frame = controller_user.updateUserProfile(cursor, conn, json)
+		#parsed = parseQueryData(query_data_frame)
+		#return formResponse(query_data_frame)
+		return formResponse({'message':'Updated'}, 401)
+	else:
+		return formResponse({'message':'bad request (input format)'}, 401)
 
 
 #UpdateUser
